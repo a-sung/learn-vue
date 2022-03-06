@@ -33,6 +33,11 @@ export default new Router({
     {
       path: '/users',
       name: 'users',
+      // beforeEnter: (to, from, next) => {
+      //   // to, from: 라우터가 어디에서 어디로 가는지의 정보
+      //   console.log('before Enter')
+      //   next()
+      // },
       component: Users,
       children:[
         {
@@ -47,5 +52,13 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/redirect-me',
+      redirect: {name: 'home'}
+    },
+    {
+      path:'/*',
+      redirect: {name: 'home'}
+    }
   ]
 })
