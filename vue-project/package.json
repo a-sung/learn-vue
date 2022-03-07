@@ -9,13 +9,15 @@
     "lint": "vue-cli-service lint",
     "precommit": "lint-staged"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.js": [
+    "*.{js,vue}": [
       "eslint --fix",
-      "git add"
-    ],
-    "*.vue": [
-      "eslint --fix",
+      "prettier --write",
       "git add"
     ]
   },
@@ -41,7 +43,9 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
-    "prettier": "^2.2.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.5.1",
     "vue-cli-plugin-quasar": "~4.0.4"
   }
 }
