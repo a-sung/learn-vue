@@ -6,20 +6,23 @@
         <router-link to="/mypage" >My</router-link> |
       </span>
       <router-link to="/login" v-else>Login</router-link>
-      <span v-if="isLogin" @click="$store.dispatch('logout')"> 로그아웃 </span>
+      <span v-if="isLogin" @click="logout"> 로그아웃 </span>
     <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   computed:{
     ...mapState(['isLogin'])
   },
+  beforeCreate() {
+    this.$store.dispatch('getMemberInfo');
+  },
   methods:{
-    // ...mapActions(['logout'])
+    ...mapActions(['logout']),
   }
 }
 </script>
