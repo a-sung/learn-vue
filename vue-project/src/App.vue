@@ -2,11 +2,22 @@
   <div class="container">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
+      <router-link to="/login">Login</router-link> |
+      <span v-if="isLogin"> 로그아웃 </span>
+      <span v-else><router-link to="/login">로그인</router-link></span>
     <router-view />
+    </div>
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+export default {
+  computed:{
+    ...mapState(['isLogin'])
+  }
+}
+</script>
 
 <style>
 #app {
