@@ -1,7 +1,9 @@
 import { createStore } from "vuex";
+import router from "../router/index.js"
 
 export default createStore({
   state: {
+    userInfo:null,
     allUsers: [
       {id:1, name:'asung', email:'abc@gmail.com', password:'123456'},
     ],
@@ -9,9 +11,10 @@ export default createStore({
     isLoginError: false,
   },
   mutations: {
-    loginSuccess(state){
+    loginSuccess(state, payload){
       state.isLogin = true;
       state.isLoginError = false;
+      state.userInfo = payload;
     },
     loginError(state){
       state.isLogin = false;
@@ -26,13 +29,11 @@ export default createStore({
           selectedUser = user;
         }
       });
-      if (selectedUser === null) {
-        commit('loginError');
-      }
-      else {
-        selectedUser.password !== loginObj.password
-          ? commit('loginError')
-          : commit('loginSuccess');
+      if (selectedUser === null || selectedUser.password !== loginObj.password){
+        commit('loginError')
+      } else{
+        commit('loginSuccess', selectedUser);
+        router.push({ name: 'mypage' });
       }
     },
   },

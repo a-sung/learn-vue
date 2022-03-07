@@ -2,9 +2,11 @@
   <div class="container">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
+      <span v-if="isLogin">
+        <router-link to="/mypage" >My</router-link> |
+      </span>
+      <router-link to="/login" v-else>Login</router-link>
       <span v-if="isLogin"> 로그아웃 </span>
-      <span v-else><router-link to="/login">로그인</router-link></span>
     <router-view />
     </div>
   </div>
