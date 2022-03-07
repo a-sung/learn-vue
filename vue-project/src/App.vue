@@ -6,7 +6,7 @@
         <router-link to="/mypage" >My</router-link> |
       </span>
       <router-link to="/login" v-else>Login</router-link>
-      <span v-if="isLogin"> 로그아웃 </span>
+      <span v-if="isLogin" @click="$store.dispatch('logout')"> 로그아웃 </span>
     <router-view />
     </div>
   </div>
@@ -17,6 +17,9 @@ import { mapState } from 'vuex'
 export default {
   computed:{
     ...mapState(['isLogin'])
+  },
+  methods:{
+    // ...mapActions(['logout'])
   }
 }
 </script>
