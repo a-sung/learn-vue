@@ -10,9 +10,9 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-  "*.js": [
-    "eslint --fix",
-    "git add"
+    "*.js": [
+      "eslint --fix",
+      "git add"
     ],
     "*.vue": [
       "eslint --fix",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "axios": "^0.26.0",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
     "vue": "^3.0.0",

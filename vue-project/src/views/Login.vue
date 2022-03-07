@@ -28,25 +28,59 @@
         color="secondary"
         label="로그인"
         @click="login({ email, password })"/>
+      <q-btn @click="test"> GET 테스트 </q-btn>
+      <q-btn @click="postTest"> POST 테스트 </q-btn>
     </div>
   </q-card>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
+// const axios = require('axios').default;
 
 export default {
-	data() {
-		return {
-			email: null,
-			password: null,
-		};
-	},
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
   computed: {
     ...mapState(['isLogin', 'isLoginError'])
   },
   methods: {
-    ...mapActions(['login'])
+    ...mapActions(['login']),
+    test(){
+      axios.get('https://reqres.in/api/users?page=2')
+        // 받아온 response data를 다시 뷰 인스턴스 내의 변수에 할당하려면 vue를 가리켜야 함.
+        // 그런데 callback 함수에서 function을 쓰게되면 this가 vue instance대신 function 내부를 가리키게 됨. -> arrow function 사용
+        .then(res => {
+          // handle success
+          console.log(res);
+        })
+        .catch(err => {
+          // handle error
+          console.log(err);
+        })
+        .then(() => {
+          // always executed
+          console.log('test');
+        });
+    },
+    postTest(){
+      axios.post('https://reqres.in/api/register', {
+        email: "eve.holt@reqres.in",
+        password: "pistol"
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   },
+
 };
 </script>
